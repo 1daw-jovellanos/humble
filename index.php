@@ -25,13 +25,13 @@ $fallido = file_exists("uploads/$ejercicioid/users/$usuarioid");
     <div class="col-md-8">
         <p>Hola <?=$fallido || $entregado?"de nuevo, ":""?><?=$usuarioid?></p>
 <?php if (!$fallido && !$entregado): ?>
-        <p>Soy <strong>Humblebot</strong>, y en esta ocasión me voy a encargar de 
-        revisar el ejercicio, antes de guardarlo para que lo tenga el profesor.</p>
+        <p>Soy <strong>Humblebot-α-0.5</strong>. Me han programado el profe para revisar los
+        ejercicios antes de guardarlos.</p>
 
-        <p>Voy a comprobar que el ejercicio compila correctamente, que el código fuente 
-            tiene un estilo razonable de acuerdo al estilo acordado en clase, y finalmente
-            realizaré algunas pruebas para ver que su comportamiento se ajusta en lo
-            fundamental a lo que se pide en el enunciado del ejercicio.</p>
+        <p>Aunque sólo soy un bot, sé comprobar que el programa compila, conozco las reglas de estilo básicas, y
+        puedo ejecutar tu programa y probarlo en mi memoria para ver si se ajusta a lo que se espera de él.
+        </p>
+
 <?php endif;?>            
 <?php if ($entregado): ?>
 <div class="alert alert-info" role="alert">
@@ -47,7 +47,11 @@ $fallido = file_exists("uploads/$ejercicioid/users/$usuarioid");
 
 
     <hr>
-        Carga el fichero utilizando este botón:
+        Carga el fichero utilizando este botón, y yo lo revisaré. Si le doy el visto bueno, lo dejaré archivado para que lo
+        mire el profe. Si no le doy el visto bueno, te indicaré por dónde veo problemas lo mejor que pueda, y tendrás que intentar
+        rectificarlos.<br>
+        <small>(Espero que todo vaya bien. Me acaban de programar y todavía estoy en 
+        <a href="https://es.wikipedia.org/wiki/Ciclo_de_vida_del_lanzamiento_de_software" target="_blank">fase alfa</a>)</small>
         <form action="upload.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input class="form-control-file" type="file" name="fileToUpload" id="fileToUpload"><br>

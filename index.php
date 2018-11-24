@@ -1,12 +1,14 @@
 <?php
+include 'utils.php';
 if (isset($_REQUEST["usuarioid"]) && isset($_REQUEST["ejercicioid"])) {
                 $usuarioid = $_REQUEST["usuarioid"];
                 $ejercicioid = $_REQUEST["ejercicioid"];
 } else {
     die ("Parámetros incorrectos");
 }
-$entregado = file_exists("uploads/$ejercicioid/entregados/$usuarioid");
-$fallido = file_exists("uploads/$ejercicioid/users/$usuarioid");
+$usuariodir = preg_replace("/[^A-Za-z0-9]/","", $usuarioid);
+$entregado = file_exists("uploads/$ejercicioid/entregados/$usuariodir");
+$fallido = file_exists("uploads/$ejercicioid/users/$usuariodir");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,7 @@ $fallido = file_exists("uploads/$ejercicioid/users/$usuarioid");
     <div class="col-md-8">
         <p>Hola <?=$fallido || $entregado?"de nuevo, ":""?><?=$usuarioid?></p>
 <?php if (!$fallido && !$entregado): ?>
-        <p>Soy <strong>Humblebot-α-0.5</strong>. Me han programado el profe para revisar los
+        <p>Soy <strong>Humblebot-α-0.5</strong>. Me ha programado el profe para revisar los
         ejercicios antes de guardarlos.</p>
 
         <p>Aunque sólo soy un bot, sé comprobar que el programa compila, conozco las reglas de estilo básicas, y
@@ -51,7 +53,7 @@ $fallido = file_exists("uploads/$ejercicioid/users/$usuarioid");
         mire el profe. Si no le doy el visto bueno, te indicaré por dónde veo problemas lo mejor que pueda, y tendrás que intentar
         rectificarlos.<br>
         <small>(Espero que todo vaya bien. Me acaban de programar y todavía estoy en 
-        <a href="https://es.wikipedia.org/wiki/Ciclo_de_vida_del_lanzamiento_de_software" target="_blank">fase alfa</a>)</small>
+        <a href="https://es.wikipedia.org/wiki/Ciclo_de_vida_del_lanzamiento_de_software" target="_blank">fase alfa</a>)</small><br><br>
         <form action="upload.php" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input class="form-control-file" type="file" name="fileToUpload" id="fileToUpload"><br>

@@ -14,8 +14,9 @@ include 'utils.php';
 if ($debug) {
     echo "Separator is $cpsep";
 }
-$usuario = isset($_REQUEST["usuarioid"]) ? $_REQUEST["usuarioid"] : "victor";
+$nombreusuario = isset($_REQUEST["usuarioid"]) ? $_REQUEST["usuarioid"] : "victor";
 $ejercicio = isset($_REQUEST["ejercicioid"]) ? $_REQUEST["ejercicioid"] : "sample";
+$usuario = preg_replace("/[^A-Za-z0-9]/","", $nombreusuario);
 
 
 $path ="uploads/$ejercicio";
@@ -60,7 +61,7 @@ if ($ok) {
 // checkstyle
 if ($ok) {
     echo "<h2>Comprobando estilo.</h2>";
-    exec("java -jar ./java/checkstyle-8.14-all.jar -c ./java/sun_checks.xml $pathpackage/$filename 2>&1" ,
+    exec("java -Duser.language=es -jar ./java/checkstyle-8.14-all.jar -c ./java/sun_checks.xml $pathpackage/$filename 2>&1" ,
     $salida, $code);
     if ($code == 0) {
         echo "<p>Estilo ok</p>";
@@ -146,6 +147,6 @@ if ($ok) {
 <?php    
 }
 ?>
-<a href="index.php?usuarioid=<?=$usuario?>&ejercicioid=<?=$ejercicio?>">Volver</a>
+<a href="index.php?usuarioid=<?=$nombreusuario?>&ejercicioid=<?=$ejercicio?>">Volver</a>
 </body>
 </html>
